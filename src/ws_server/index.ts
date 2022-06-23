@@ -1,13 +1,14 @@
-import { WebSocketServer } from 'ws';
+import { WebSocketServer, createWebSocketStream } from 'ws';
+import Jimp from 'jimp';
 import { mouse } from '../robot/mouse.js';
 import { draw } from '../robot/draw.js';
+import { screen } from '../robot/screen.js';
 
 const WSS_PORT = 4000;
 const wsServer = new WebSocketServer({ port: WSS_PORT });
 wsServer.on('connection', (ws) => {
-  ws.on('message', (msg) => {
+  ws.on('message', async (msg) => {
     const command = msg.toString().split(' ');
-    console.log(command[1]);
     switch (command[0]) {
       case 'mouse_position':
         ws.send(mouse.position());
@@ -40,8 +41,12 @@ wsServer.on('connection', (ws) => {
         draw.rectangular(command[1], command[2]);
         ws.send(command[0]);
         break;
+      case 'prnt_scrn':
+        await screen(ws);
+        // ws.send(command[0]);
+        break;
       default:
-        ws.send('');
+        ws.send(' ');
         break;
     }
   });

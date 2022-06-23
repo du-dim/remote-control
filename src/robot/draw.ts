@@ -7,7 +7,7 @@ class Draw {
   constructor() {
     this.x = 0;
     this.y = 0;
-    this.time = 0.5;
+    this.time = 0;
   }
   posXY() {
     this.x = robot.getMousePos().x;
