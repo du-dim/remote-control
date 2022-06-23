@@ -1,17 +1,11 @@
 import robot from 'robotjs';
+import { Mouse } from './mouse.js';
 
-class Draw {
-  x: number;
-  y: number;
+class Draw extends Mouse {
   time: number;
   constructor() {
-    this.x = 0;
-    this.y = 0;
-    this.time = 0;
-  }
-  posXY() {
-    this.x = robot.getMousePos().x;
-    this.y = robot.getMousePos().y;
+    super();
+    this.time = 1;
   }
 
   async move() {
@@ -43,20 +37,21 @@ class Draw {
   async square(size: string) {
     this.posXY();
     const s = Number(size);
-    for (let i = 0; i <= s; i++) {
-      this.x = this.x + 1;
+    const step = s / 50;
+    for (let i = 0; i <= s; i += step) {
+      this.x = this.x + step;
       await this.move();
     }
-    for (let i = 0; i <= s; i++) {
-      this.y = this.y + 1;
+    for (let i = 0; i <= s; i += step) {
+      this.y = this.y + step;
       await this.move();
     }
-    for (let i = 0; i <= s; i++) {
-      this.x = this.x - 1;
+    for (let i = 0; i <= s; i += step) {
+      this.x = this.x - step;
       await this.move();
     }
-    for (let i = 0; i <= s; i++) {
-      this.y = this.y - 1;
+    for (let i = 0; i <= s; i += step) {
+      this.y = this.y - step;
       await this.move();
     }
   }
@@ -65,20 +60,22 @@ class Draw {
     this.posXY();
     const w = Number(width);
     const h = Number(height);
-    for (let i = 0; i <= w; i++) {
-      this.x = this.x + 1;
+    const stepW = w / 50;
+    const stepH = h / 50;
+    for (let i = 0; i <= w; i += stepW) {
+      this.x = this.x + stepW;
       await this.move();
     }
-    for (let i = 0; i <= h; i++) {
-      this.y = this.y + 1;
+    for (let i = 0; i <= h; i += stepH) {
+      this.y = this.y + stepH;
       await this.move();
     }
-    for (let i = 0; i <= w; i++) {
-      this.x = this.x - 1;
+    for (let i = 0; i <= w; i += stepW) {
+      this.x = this.x - stepW;
       await this.move();
     }
-    for (let i = 0; i <= h; i++) {
-      this.y = this.y - 1;
+    for (let i = 0; i <= h; i += stepH) {
+      this.y = this.y - stepH;
       await this.move();
     }
   }

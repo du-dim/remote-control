@@ -1,6 +1,6 @@
 import robot from 'robotjs';
 
-class Mouse {
+export class Mouse {
   x: number;
   y: number;
   constructor() {
