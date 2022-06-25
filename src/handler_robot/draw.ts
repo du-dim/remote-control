@@ -10,10 +10,8 @@ class Draw extends Mouse {
 
   async move() {
     const promis = new Promise((res) => {
-      robot.mouseToggle('down');
       setTimeout(() => {
         robot.moveMouse(this.x, this.y);
-        robot.mouseToggle('up');
         res(true);
       }, this.time);
     });
@@ -26,18 +24,20 @@ class Draw extends Mouse {
     const a = (Math.acos(1 / r) * Math.PI) / 180;
     const cx = this.x;
     const cy = this.y + r;
-
-    for (let i = 0; i <= 2 * Math.PI; i += a) {
+    robot.mouseToggle('down');
+    for (let i = 0; i <= 2 * Math.PI + a; i += a) {
       this.x = cx + r * Math.sin(i);
       this.y = cy - r * Math.cos(i);
       await this.move();
     }
+    robot.mouseToggle('up');
   }
 
   async square(size: string) {
     this.posXY();
     const s = Number(size);
     const step = s / 50;
+    robot.mouseToggle('down');
     for (let i = 0; i <= s; i += step) {
       this.x = this.x + step;
       await this.move();
@@ -54,30 +54,32 @@ class Draw extends Mouse {
       this.y = this.y - step;
       await this.move();
     }
+    robot.mouseToggle('up');
   }
 
   async rectangular(width: string, height: string) {
     this.posXY();
     const w = Number(width);
     const h = Number(height);
-    const stepW = w / 50;
-    const stepH = h / 50;
-    for (let i = 0; i <= w; i += stepW) {
-      this.x = this.x + stepW;
+    const step = (w + h) / 100;
+    robot.mouseToggle('down');
+    for (let i = 0; i <= w; i += step) {
+      this.x = this.x + step;
       await this.move();
     }
-    for (let i = 0; i <= h; i += stepH) {
-      this.y = this.y + stepH;
+    for (let i = 0; i <= h; i += step) {
+      this.y = this.y + step;
       await this.move();
     }
-    for (let i = 0; i <= w; i += stepW) {
-      this.x = this.x - stepW;
+    for (let i = 0; i <= w; i += step) {
+      this.x = this.x - step;
       await this.move();
     }
-    for (let i = 0; i <= h; i += stepH) {
-      this.y = this.y - stepH;
+    for (let i = 0; i <= h; i += step) {
+      this.y = this.y - step;
       await this.move();
     }
+    robot.mouseToggle('up');
   }
 }
 
