@@ -38,7 +38,7 @@ wsServer.on('connection', (ws) => {
         break;
       case 'draw_circle':
         draw.circle(command[1]);
-        duplex.write(command[0] + '\0');
+        duplex.write(command[0]);
         console.log(`\x1b[32mResult:\x1b[0m ${command[0]} completed successfully\n`);
         break;
       case 'draw_square':
