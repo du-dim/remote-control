@@ -13,7 +13,6 @@ export class Mouse {
   }
   position() {
     this.posXY();
-    console.log(`mouse_position ${this.x},${this.y}`);
     return `mouse_position ${this.x},${this.y}`;
   }
   up(value: string) {
