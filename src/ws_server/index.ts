@@ -3,7 +3,7 @@ import { mouse } from '../handler_robot/mouse.js';
 import { draw } from '../handler_robot/draw.js';
 import { screen } from '../handler_robot/screen.js';
 
-const WSS_PORT = 8081;
+const WSS_PORT = 8181;
 const wsServer = new WebSocketServer({ port: WSS_PORT });
 
 wsServer.on('connection', (ws) => {
