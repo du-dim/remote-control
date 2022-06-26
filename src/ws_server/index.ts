@@ -7,6 +7,7 @@ const WSS_PORT = process.env.WSS_PORT || 8181;
 const wsServer = new WebSocketServer({ port: +WSS_PORT });
 
 wsServer.on('connection', (ws) => {
+  console.log(`Start webSocket server on the ${WSS_PORT} port!`);
   const duplex = createWebSocketStream(ws, { encoding: 'utf8', decodeStrings: false });
   ws.on('message', async (msg) => {
     console.log(`\x1b[36mReceived: \x1b[0m${msg}`);
