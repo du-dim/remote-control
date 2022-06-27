@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "esModuleInterop": true,    
+    "outDir": "backend",
+    "rootDir": "src",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "removeComments": true, 
+    "strict": true,
+    "noImplicitAny": true,         
+    "types": [ "node"],
+  },  
+  "exclude": ["node_modules", "front", "backend"  ],
+  "include": ["src" ],
+  "ts-node": {  
+    "esm": true,
+  },       
+}
